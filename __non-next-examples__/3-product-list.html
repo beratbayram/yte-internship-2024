@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product List</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      width: 50%;
+      margin: auto;
+      text-align: center;
+    }
+
+    input[type="text"] {
+      width: 80%;
+      padding: 5px;
+      margin: 10px 0;
+      font-size: 16px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th,
+    td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f2f2f2;
+      font-size: 18px;
+    }
+
+    .category {
+      background-color: #f9f9f9;
+      font-weight: bold;
+    }
+
+    .out-of-stock {
+      color: red;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <input type="text" id="search" placeholder="Search...">
+    <label>
+      <input type="checkbox" id="inStock">
+      Only show products in stock
+    </label>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="category">
+          <td colspan="2">Fruits</td>
+        </tr>
+        <tr>
+          <td>Apple</td>
+          <td>$1</td>
+        </tr>
+        <tr>
+          <td>Dragonfruit</td>
+          <td>$1</td>
+        </tr>
+        <tr class="out-of-stock">
+          <td>Passionfruit</td>
+          <td>$2</td>
+        </tr>
+        <tr class="category">
+          <td colspan="2">Vegetables</td>
+        </tr>
+        <tr>
+          <td>Spinach</td>
+          <td>$2</td>
+        </tr>
+        <tr class="out-of-stock">
+          <td>Pumpkin</td>
+          <td>$4</td>
+        </tr>
+        <tr>
+          <td>Peas</td>
+          <td>$1</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.getElementById('search');
+    const inStockCheckbox = document.getElementById('inStock');
+    const rows = document.querySelectorAll('tbody tr:not(.category)');
+
+    searchInput.addEventListener('input', filterProducts);
+    inStockCheckbox.addEventListener('change', filterProducts);
+
+    function filterProducts() {
+        const searchValue = searchInput.value.toLowerCase();
+        const onlyInStock = inStockCheckbox.checked;
+
+        rows.forEach(row => {
+            const productName = row.children[0].textContent.toLowerCase();
+            const isOutOfStock = row.classList.contains('out-of-stock');
+
+            let shouldShow = productName.includes(searchValue);
+            if (onlyInStock && isOutOfStock) {
+                shouldShow = false;
+            }
+
+            row.style.display = shouldShow ? '' : 'none';
+        });
+    }
+});
+  </script>
+</body>
+
+</html>
