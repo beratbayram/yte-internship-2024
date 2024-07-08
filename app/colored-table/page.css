@@ -3,7 +3,7 @@
 }
 
 
-body > div {
+main > div {
   background-color: red;
   padding: 10px;
   border: 10px solid pink;
