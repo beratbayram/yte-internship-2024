@@ -2,7 +2,6 @@
   box-sizing: border-box;
 }
 
-
 main > div {
   background-color: red;
   padding: 10px;
@@ -23,6 +22,10 @@ main > div {
 
       &.green {
         background-color: green;
+      }
+
+      &.lightgreen {
+        background-color: lightgreen;
       }
     }
   }
