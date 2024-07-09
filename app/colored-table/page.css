@@ -20,6 +20,14 @@ main > div {
         background-color: yellow;
       }
 
+      &.lightblue {
+        background-color: cyan;
+      }
+
+      &.lightyellow {
+        background-color: lightyellow;
+      }
+
       &.green {
         background-color: green;
       }
