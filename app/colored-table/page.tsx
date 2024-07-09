@@ -1,9 +1,29 @@
 "use client";
 
+import { useState } from "react";
 import "./page.css";
 
 interface Props {
   classes: [string, string, string];
+}
+
+const COLORS = ["green", "yellow", ""];
+
+interface CellProps {
+  defaultClassName: string;
+}
+
+function Cell({ defaultClassName }: CellProps) {
+
+  const defaultClassNameNumber = COLORS.indexOf(defaultClassName);
+
+  const [color, setColor] = useState(defaultClassNameNumber);
+
+  function changeColor() {
+    setColor((color + 1) % COLORS.length)
+  }
+
+  return <div onClick={changeColor} className={COLORS[color]}></div>;
 }
 
 function Row({ classes }: Props) {
@@ -11,16 +31,11 @@ function Row({ classes }: Props) {
   // (classes[0] da kullanılabilir)
   const [classes1, classes2, classes3] = classes;
 
-  function yellColor(color: string) {
-    if (color === "") return;
-    alert(`The color is ${color}`);
-  }
-
   return (
     <div className="row">
-      <div onClick={() => yellColor(classes1)} className={classes1}></div>
-      <div onClick={() => yellColor(classes2)} className={classes2}></div>
-      <div onClick={() => yellColor(classes3)} className={classes3}></div>
+      <Cell defaultClassName={classes1} />
+      <Cell defaultClassName={classes2} />
+      <Cell defaultClassName={classes3} />
     </div>
   );
 }
