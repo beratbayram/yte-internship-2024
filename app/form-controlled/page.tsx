@@ -13,23 +13,28 @@ function isPasswordValid(password: string): boolean {
 }
 
 export default function App() {
-
   const [user, setUser] = useState({
     mail: "",
-    password: ""
-  })
-  
+    password: "",
+  });
+
   function handlePasswordChange(event: React.ChangeEvent<HTMLInputElement>) {
     setUser({
       ...user,
-      password: event.target.value
-    })
+      password: event.target.value,
+    });
   }
 
   function handleMailChange(event: React.ChangeEvent<HTMLInputElement>) {
     const newUser = structuredClone(user);
     newUser.mail = event.target.value;
     setUser(newUser);
+  }
+
+  function handleClick(
+    event: React.MouseEvent<HTMLInputElement, MouseEvent>
+  ): void {
+    event.preventDefault();
   }
 
   return (
@@ -55,9 +60,11 @@ export default function App() {
           />
         </label>
         <br />
+
         <input
           type="submit"
           value="Submit"
+          onClick={handleClick}
           disabled={!isPasswordValid(user.password)}
         />
       </form>
