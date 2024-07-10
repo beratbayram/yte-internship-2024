@@ -13,15 +13,23 @@ function isPasswordValid(password: string): boolean {
 }
 
 export default function App() {
-  const [mail, setMail] = useState("");
-  const [password, setPassword] = useState("");
+
+  const [user, setUser] = useState({
+    mail: "",
+    password: ""
+  })
   
   function handlePasswordChange(event: React.ChangeEvent<HTMLInputElement>) {
-    setPassword(event.target.value);
+    setUser({
+      ...user,
+      password: event.target.value
+    })
   }
 
   function handleMailChange(event: React.ChangeEvent<HTMLInputElement>) {
-    setMail(event.target.value);
+    const newUser = structuredClone(user);
+    newUser.mail = event.target.value;
+    setUser(newUser);
   }
 
   return (
@@ -32,18 +40,17 @@ export default function App() {
           <input
             type="email"
             name="email"
-            value={mail}
+            value={user.mail}
             onChange={handleMailChange}
           />
         </label>
-        {mail}
         <br />
         <label>
           Password:
           <input
             type="password"
             name="password"
-            value={password}
+            value={user.password}
             onChange={handlePasswordChange}
           />
         </label>
@@ -51,7 +58,7 @@ export default function App() {
         <input
           type="submit"
           value="Submit"
-          disabled={!isPasswordValid(password)}
+          disabled={!isPasswordValid(user.password)}
         />
       </form>
     </main>
