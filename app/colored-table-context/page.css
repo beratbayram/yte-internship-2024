@@ -1,0 +1,69 @@
+* {
+  box-sizing: border-box;
+}
+
+main > div {
+  background-color: red;
+  padding: 10px;
+  border: 10px solid pink;
+  width: 340px;
+
+  .row {
+    display: flex;
+
+    div {
+      width: 100px;
+      height: 100px;
+      background-color: blue;
+
+      &.yellow {
+        background-color: yellow;
+      }
+
+      &.lightblue {
+        background-color: cyan;
+      }
+
+      &.lightyellow {
+        background-color: lightyellow;
+      }
+
+      &.green {
+        background-color: green;
+      }
+
+      &.lightgreen {
+        background-color: lightgreen;
+      }
+    }
+  }
+}
+
+/*  same as above but with no nesting 
+
+body > div {
+  background-color: red;
+  padding: 10px;
+  border: 10px solid pink;
+  width: 340px;
+}
+
+body > div .row {
+  display: flex;
+}
+
+body > div .row div {
+  width: 100px;
+  height: 100px;
+  background-color: blue;
+}
+
+body > div .row div#yellow {
+  background-color: yellow;
+}
+
+body > div .row div.green {
+  background-color: green;
+}
+
+*/
